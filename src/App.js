@@ -8,16 +8,16 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("New Playlist");
 
-  // Función para buscar canciones
+  // Función de búsqueda (placeholder)
   const handleSearch = (term) => {
-    console.log("Buscar:", term);
-    // Aquí pondrías la lógica para buscar canciones
+    console.log("Search clicked:", term);
+    // Aquí iría la lógica real de búsqueda
   };
 
-  // Función para guardar playlist en Spotify
+  // Función para guardar playlist (placeholder)
   const handleSave = () => {
-    console.log("Guardar playlist en Spotify");
-    // Aquí pondrías la lógica para guardar la playlist
+    console.log("Save to Spotify clicked");
+    // Aquí iría la lógica para guardar la playlist en Spotify
   };
 
   return (
