@@ -12,6 +12,11 @@ function Track({ track, onAdd }) {
             +
           </button>
         )}
+        {onRemove && (
+          <button onClick={() => onRemove(track)} style={{ marginLeft: "10px"}}>
+            -
+          </button>
+        )}
       </p>
     </div>
   );

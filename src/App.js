@@ -36,6 +36,13 @@ function App() {
     }
   };
 
+  const removeTrack = (track) => {
+    setPlaylistTracks(
+      playlistTracks.filter((t) => t.id !== track.id)
+    );
+  };
+
+
   return (
     <div>
       <h1>Jammming</h1>
@@ -45,6 +52,7 @@ function App() {
         tracks={playlistTracks}
         playlistName={playlistName}
         onSave={handleSave}
+        onRemove={removeTrack}
       />
     </div>
   );
