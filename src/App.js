@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar/SearchBar";
+import SearchResults from "./components/SearchResults/SearchResults";
+import Playlist from "./components/Playlist/Playlist";
 
 function App() {
+  const [searchResults, setSearchResults] = useState([]);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+
+  // Función para buscar canciones
+  const handleSearch = (term) => {
+    console.log("Buscar:", term);
+    // Aquí pondrías la lógica para buscar canciones
+  };
+
+  // Función para guardar playlist en Spotify
+  const handleSave = () => {
+    console.log("Guardar playlist en Spotify");
+    // Aquí pondrías la lógica para guardar la playlist
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Jammming</h1>
+      <SearchBar onSearch={handleSearch} />
+      <SearchResults results={searchResults} />
+      <Playlist
+        tracks={playlistTracks}
+        playlistName={playlistName}
+        onSave={handleSave}
+      />
     </div>
   );
 }
