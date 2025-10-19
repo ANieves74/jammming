@@ -8,16 +8,21 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("New Playlist");
 
-  // Función de búsqueda (placeholder)
+  // Datos simulados
+  const exampleTracks = [
+    { id: 1, name: "Track 1", artist: "Artist A", album: "Album X" },
+    { id: 2, name: "Track 2", artist: "Artist B", album: "Album Y" },
+    { id: 3, name: "Track 3", artist: "Artist C", album: "Album Z" },
+  ];
+
+  // Función de búsqueda (simula recibir datos de Spotify)
   const handleSearch = (term) => {
     console.log("Search clicked:", term);
-    // Aquí iría la lógica real de búsqueda
+    setSearchResults(exampleTracks); // Asignamos los datos de ejemplo
   };
 
-  // Función para guardar playlist (placeholder)
   const handleSave = () => {
     console.log("Save to Spotify clicked");
-    // Aquí iría la lógica para guardar la playlist en Spotify
   };
 
   return (

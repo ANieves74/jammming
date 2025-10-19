@@ -1,9 +1,13 @@
 import React from "react";
 
 function Track({ track }) {
+  if (!track) return null;
+
   return (
     <div>
-      <p>{track ? `${track.name} - ${track.artist}` : "No track"}</p>
+      <p>
+        <strong>{track.name}</strong> by {track.artist} | Album: {track.album}
+      </p>
     </div>
   );
 }
