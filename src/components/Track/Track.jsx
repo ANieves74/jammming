@@ -1,6 +1,6 @@
 import React from "react";
 
-function Track({ track, onAdd }) {
+function Track({ track, onAdd, onRemove }) {
   if (!track) return null;
 
   return (
