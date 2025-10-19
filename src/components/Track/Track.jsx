@@ -1,12 +1,17 @@
 import React from "react";
 
-function Track({ track }) {
+function Track({ track, onAdd }) {
   if (!track) return null;
 
   return (
     <div>
       <p>
         <strong>{track.name}</strong> by {track.artist} | Album: {track.album}
+        {onAdd && (
+          <button onClick={() => onAdd(track)} style={{ marginLeft: "10px" }}>
+            +
+          </button>
+        )}
       </p>
     </div>
   );
