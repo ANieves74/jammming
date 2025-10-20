@@ -1,7 +1,7 @@
 // src/util/Spotify.js
 
 const clientId = "7c799ed696e34ca4aa4be72ba83a0dff"; // tu client ID
-const redirectUri = "https://ngrok.com/docs/errors/err_ngrok_4018"; // URL de redirección de desarrollo
+const redirectUri = "https://homogeneously-snaglike-selena.ngrok-free.dev"; // URL de redirección de desarrollo
 let accessToken;
 let expiresIn;
 
