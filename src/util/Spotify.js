@@ -1,12 +1,12 @@
 const clientId = "7c799ed696e34ca4aa4be72ba83a0dff";
-const redirectUri = "https://homogeneously-snaglike-selena.ngrok-free.dev"; // ✅ usar ngrok
+const redirectUri = "https://homogeneously-snaglike-selena.ngrok-free.dev"; // URL pública ngrok
 let accessToken;
 
 const Spotify = {
   getAccessToken() {
     if (accessToken) return accessToken;
 
-    // Extraer token de la URL
+    // Buscar token en la URL
     const tokenMatch = window.location.href.match(/access_token=([^&]*)/);
     const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
@@ -14,15 +14,15 @@ const Spotify = {
       accessToken = tokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
 
-      // Limpiar token después del tiempo
+      // Borrar token después de expirar
       window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
 
-      // Limpiar URL para que no se vea el token
+      // Limpiar URL
       window.history.pushState("Access Token", null, "/");
 
       return accessToken;
     } else {
-      // Redirigir a login de Spotify
+      // Redirigir al login de Spotify
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
       window.location = accessUrl;
     }
@@ -54,9 +54,11 @@ const Spotify = {
     const token = this.getAccessToken();
     const headers = { Authorization: `Bearer ${token}` };
 
+    // Obtener ID de usuario
     const response = await fetch("https://api.spotify.com/v1/me", { headers });
     const { id: userId } = await response.json();
 
+    // Crear playlist
     const createPlaylistResponse = await fetch(
       `https://api.spotify.com/v1/users/${userId}/playlists`,
       {
@@ -68,6 +70,7 @@ const Spotify = {
 
     const { id: playlistId } = await createPlaylistResponse.json();
 
+    // Agregar canciones
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       headers,
       method: "POST",
