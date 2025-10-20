@@ -2,55 +2,45 @@ import React, { useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Playlist from "./components/Playlist/Playlist";
+import Spotify from "./util/Spotify";
 
 function App() {
-  // Estado de búsqueda
+  // Estado para resultados de búsqueda
   const [searchResults, setSearchResults] = useState([]);
-
-  // Estado de playlist
+  // Estado para playlist
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My Playlist");
 
-  // Datos simulados para búsqueda
-const exampleTracks = [
-  { id: 1, name: "Track 1", artist: "Artist A", album: "Album X", uri: "spotify:track:111" },
-  { id: 2, name: "Track 2", artist: "Artist B", album: "Album Y", uri: "spotify:track:222" },
-  { id: 3, name: "Track 3", artist: "Artist C", album: "Album Z", uri: "spotify:track:333" },
-];
-
-  // Función de búsqueda (simulada)
+  // 🔍 Buscar canciones en Spotify
   const handleSearch = (term) => {
-    console.log("Search clicked:", term);
-    setSearchResults(exampleTracks);
+    Spotify.search(term).then(setSearchResults);
   };
 
-  // Función para agregar track a playlist
+  // ➕ Añadir canción a playlist
   const addTrack = (track) => {
     if (!playlistTracks.find((t) => t.id === track.id)) {
-      setPlaylistTracks([...playlistTracks, track]);
+      setPlaylistTracks((prevTracks) => [...prevTracks, track]);
     }
   };
 
+  // ➖ Quitar canción de playlist
   const removeTrack = (track) => {
-    setPlaylistTracks(
-      playlistTracks.filter((t) => t.id !== track.id)
-    );
+    setPlaylistTracks((prevTracks) => prevTracks.filter((t) => t.id !== track.id));
   };
 
-    // Función para guardar playlist
+  // 💾 Guardar playlist en Spotify
   const handleSave = () => {
-    if (playlistTracks.length === 0) {
-      alert("Your playlist is empty!")
-      return;
-    } 
-
     const trackUris = playlistTracks.map((track) => track.uri);
-    console.log("Saving playlist:", playlistName);
-    console.log("Track URIs:", trackUris);
 
-    setPlaylistName("New Playlist");
-    setPlaylistTracks([]);
-    alert("Playlist saved successfully!");
+    Spotify.savePlaylist(playlistName, trackUris).then((success) => {
+      if (success) {
+        setPlaylistName("New Playlist");
+        setPlaylistTracks([]);
+        alert("✅ Playlist saved to Spotify!");
+      } else {
+        alert("⚠️ Error saving playlist. Try again!");
+      }
+    });
   };
 
   return (
