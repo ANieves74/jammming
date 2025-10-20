@@ -5,15 +5,22 @@ import Playlist from "./components/Playlist/Playlist";
 import Spotify from "./util/Spotify";
 
 function App() {
-  // Estado para resultados de búsqueda
   const [searchResults, setSearchResults] = useState([]);
-  // Estado para playlist
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My Playlist");
 
   // 🔍 Buscar canciones en Spotify
-  const handleSearch = (term) => {
-    Spotify.search(term).then(setSearchResults);
+  const handleSearch = async (term) => {
+    try {
+      const results = await Spotify.search(term);
+      setSearchResults(results);
+      if (!results.length) {
+        alert("No tracks found. Check your Spotify login and token.");
+      }
+    } catch (error) {
+      console.error("Error searching Spotify:", error);
+      alert("Error connecting to Spotify. Make sure you have a valid token.");
+    }
   };
 
   // ➕ Añadir canción a playlist
@@ -29,18 +36,17 @@ function App() {
   };
 
   // 💾 Guardar playlist en Spotify
-  const handleSave = () => {
+  const handleSave = async () => {
     const trackUris = playlistTracks.map((track) => track.uri);
-
-    Spotify.savePlaylist(playlistName, trackUris).then((success) => {
-      if (success) {
-        setPlaylistName("New Playlist");
-        setPlaylistTracks([]);
-        alert("✅ Playlist saved to Spotify!");
-      } else {
-        alert("⚠️ Error saving playlist. Try again!");
-      }
-    });
+    try {
+      await Spotify.savePlaylist(playlistName, trackUris);
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+      alert("✅ Playlist saved to Spotify!");
+    } catch (error) {
+      console.error("Error saving playlist:", error);
+      alert("⚠️ Error saving playlist. Try again!");
+    }
   };
 
   return (
