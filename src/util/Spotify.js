@@ -1,7 +1,7 @@
 // src/util/Spotify.js
 
 const clientId = "7c799ed696e34ca4aa4be72ba83a0dff"; // tu client ID
-const redirectUri = "http://localhost:3000/"; // URL de redirección de desarrollo
+const redirectUri = "https://github.com/ANieves74/jammming/"; // URL de redirección de desarrollo
 let accessToken;
 let expiresIn;
 
