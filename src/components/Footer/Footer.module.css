@@ -1,0 +1,20 @@
+.Footer {
+    font-size: 15px;
+    color: #0351A6;
+    text-align: center;
+}
+
+.footerLink {
+    color: #0351A6;
+    text-decoration: none;
+}
+
+.footerLink:visited {
+    color: inherit;
+}
+
+.footerLink:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    transition: all ease-in-out .4s;
+}

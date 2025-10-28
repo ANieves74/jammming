@@ -1,25 +1,42 @@
-import React from "react";
+import React from 'react';
+import styles from './Track.module.css';
 
-function Track({ track, onAdd, onRemove }) {
-  if (!track) return null;
+const Track = (props) => {
 
-  return (
-    <div>
-      <p>
-        <strong>{track.name}</strong> by {track.artist} | Album: {track.album}
-        {onAdd && (
-          <button onClick={() => onAdd(track)} style={{ marginLeft: "10px" }}>
-            +
-          </button>
-        )}
-        {onRemove && (
-          <button onClick={() => onRemove(track)} style={{ marginLeft: "10px"}}>
-            -
-          </button>
-        )}
-      </p>
-    </div>
-  );
-}
+    const renderAction = () => {
+        if (props.isRemoval) {
+            return (
+                <button className={styles.TrackAction} onClick={passTrackToRemove}>
+                    &times;
+                </button>
+            );
+        } else {
+            return (
+                <button className={styles.TrackAction} onClick={passTrack}>
+                    &rsaquo;
+                </button>
+            );
+        }
+    };
+
+    const passTrack = () => {
+        props.onAdd(props.track);
+    };
+
+    const passTrackToRemove = () => {
+        props.onRemove(props.track);
+    };
+
+    return (
+
+        <div className={styles.Track}>
+            <div className={styles.TrackInfo}>
+                <h3>{props.track.name}</h3>
+                <p><span className={styles.highlight}>Artist:</span> {props.track.artist} | <span className={styles.highlight}>Album:</span> {props.track.album}</p>
+            </div>
+            {renderAction()}
+        </div>
+    );
+};
 
 export default Track;

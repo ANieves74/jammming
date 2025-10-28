@@ -1,0 +1,24 @@
+.Header {
+    display: block;
+    height: 100px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 1000;
+    color: #009BC2;
+  }
+
+.mmm {
+    color: #0351A6;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    background-image: url("../../../public/jammming-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
