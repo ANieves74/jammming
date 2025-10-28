@@ -1,4 +1,4 @@
-const clientID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+const clientId = "7c799ed696e34ca4aa4be72ba83a0dff";
 const redirectUrl = "https://jammming-tracks.netlify.app/";
 
 let accessToken = "";
